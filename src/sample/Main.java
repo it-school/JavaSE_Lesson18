@@ -49,30 +49,35 @@ public class Main extends Application {
             ResultSet rs = st.executeQuery("use itschool;");
             System.out.println("\nUSING DB" + rs.toString());
 
-            int result = st.executeUpdate("delete from users where id > 2;");
+            int result;
+
+            result = st.executeUpdate("delete from users where id > 2;");
             System.out.println("\nDeleted " + result + " records");
 
-            result = st.executeUpdate("insert into users(id, login, password, name, regdate) values (3, 'user1', 'password1', 'User User User', '20090708212121');");
+            result = st.executeUpdate("insert into users(id, login, password, name, regdate) values (null, 'user1', 'password1', 'User User User', '20090708212121');");
             System.out.println("\nInserted " + result + " records");
 
             PreparedStatement st1 = con.prepareStatement("insert into users(id, login, password, name, regdate) values (?, ?, ?, ?, ?);");
             double num1 = Math.random()*100;
-            String date1 = "20091228080000";
+            String date1 = "20180524200123";
 
             String str = String.valueOf(5+Math.round(num1));
-            st1.setString(1, "4");
+            st1.setString(1, null);
             st1.setString(2, "user" + str);
             st1.setString(3, "password" + str);
             st1.setString(4, "user" + str);
             st1.setString(5, date1);
-            System.out.println("\nParametrized query" + st1.toString());
+            System.out.println("\nParametrized query:\t" + st1.toString());
 
             result = st1.executeUpdate();
             System.out.println("\nInserted " + result + " records");
 
+            result = st.executeUpdate("update users set login='SuperUser', name='SuperSuper User' where id = 1;");
+            System.out.println("\nInserted " + result + " records");
+
             rs.close();
             st.close();
-//  Закончили запрос
+        //  Закончили запросы
         }
         catch( SQLException e )
         {
@@ -91,11 +96,8 @@ public class Main extends Application {
         }
     }
 
-
-
-
-
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 }

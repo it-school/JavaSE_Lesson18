@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -23,11 +23,7 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="518f51f6-ae88-48d7-bf8e-0a81aa2c416d">
-        <schema name="itschool" object-types="table" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="518f51f6-ae88-48d7-bf8e-0a81aa2c416d">
@@ -148,7 +144,7 @@
           <description value="" />
           <database-type value="MYSQL" />
           <config-type value="CUSTOM" />
-          <database-version value="9999.0" />
+          <database-version value="5.7" />
           <driver-source value="EXTERNAL" />
           <driver-library value="D:\mysql-connector-java-8.0.11.jar" />
           <driver value="com.mysql.jdbc.Driver" />
