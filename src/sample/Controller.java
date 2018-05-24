@@ -19,7 +19,7 @@ import static java.sql.DriverManager.getConnection;
 public class Controller {
     @FXML
     public TableView<Users> table1;
-    ObservableList<Users> data;
+    private ObservableList<Users> data;
 
     @FXML
     Button buttonLoadData;
@@ -36,9 +36,9 @@ public class Controller {
     @FXML
     TitledPane header;
 
-    Connection con = null;
+    private Connection con = null;
 
-    private boolean connect(String conn) {
+    private boolean DBconnect(String conn, String login, String password) {
         boolean result = false;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -52,8 +52,8 @@ public class Controller {
 
             // здесь осуществляется соединение c login и password
             Properties properties = new Properties();
-            properties.setProperty("user", "itschool");
-            properties.setProperty("password", "");
+            properties.setProperty("user", login);
+            properties.setProperty("password", password);
             properties.setProperty("useSSL", "false");
             properties.setProperty("autoReconnect", "true");
 
@@ -74,17 +74,25 @@ public class Controller {
             //  Формирование запросов к БД
             Statement st = con.createStatement();
 
-            ResultSet rs = st.executeQuery("use itschool;");
+            ResultSet rs;// = st.executeQuery("use itschool;");
 
             rs = st.executeQuery("select * from users;");
-            System.out.println("\nEXECUTING QUERY TO DB"+rs.toString()+"\n");
+            System.out.println("\nEXECUTING QUERY TO DB: "+rs.toString()+"\n");
 
             data = FXCollections.observableArrayList();
+/*
             c1.setCellValueFactory(new PropertyValueFactory<Users, Integer>("ID"));
             c2.setCellValueFactory(new PropertyValueFactory<Users, String>("login"));
             c3.setCellValueFactory(new PropertyValueFactory<Users, String>("password"));
             c4.setCellValueFactory(new PropertyValueFactory<Users, String>("name"));
             c5.setCellValueFactory(new PropertyValueFactory<Users, Date>("datereg"));
+*/
+            // Можно не уточнять тип
+            c1.setCellValueFactory(new PropertyValueFactory<>("ID"));
+            c2.setCellValueFactory(new PropertyValueFactory<>("login"));
+            c3.setCellValueFactory(new PropertyValueFactory<>("password"));
+            c4.setCellValueFactory(new PropertyValueFactory<>("name"));
+            c5.setCellValueFactory(new PropertyValueFactory<>("datereg"));
 
             while (rs.next())
             {
@@ -119,7 +127,7 @@ public class Controller {
     }
 
     public void ConnectDB(ActionEvent actionEvent) {
-        if (connect("192.168.1.152:3309/itschool"))
+        if (DBconnect("192.168.1.152:3309/itschool", "itschool", ""))
             header.setText("Connected sucesfully");
         else
             header.setText("Didn't connected!!!");
