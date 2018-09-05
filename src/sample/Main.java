@@ -52,7 +52,7 @@ public class Main extends Application {
             int result = st.executeUpdate("delete from users where id > 2;");
             System.out.println("\nDeleted " + result + " records");
 
-            result = st.executeUpdate("insert into users(id, login, password, name, regdate) values (3, 'user1', 'password1', 'User User User', '20090708212121');");
+            result = st.executeUpdate("insert into users(id, login, password, name, regdate) values (3, 'user123', 'password123', 'User User User', '20090708212121');");
             System.out.println("\nInserted " + result + " records");
 
             PreparedStatement st1 = con.prepareStatement("insert into users(id, login, password, name, regdate) values (?, ?, ?, ?, ?);");

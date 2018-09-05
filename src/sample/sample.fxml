@@ -26,9 +26,8 @@
             <TableColumn fx:id="c2" prefWidth="122.0" text="login" />
             <TableColumn fx:id="c3" prefWidth="108.0" text="password" />
             <TableColumn fx:id="c4" prefWidth="199.0" text="name" />
-            <TableColumn fx:id="c5" minWidth="0.0" prefWidth="118.0" text="registered" />
+            <TableColumn fx:id="c5" prefWidth="118.0" text="registered" />
         </columns>
       </TableView>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
    </children>
 </VBox>

@@ -102,6 +102,7 @@ public class Controller {
             header.setText("Error while loading data!!!");
             e.printStackTrace();
         }
+
     }
 
     public void Exit(ActionEvent actionEvent) {
@@ -109,6 +110,7 @@ public class Controller {
         {
             try {
                 con.close();
+                header.setText("Disconnected successfully");
             }
             catch (Exception e)
             {
