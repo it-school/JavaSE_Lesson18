@@ -48,7 +48,7 @@ public class Main extends Application {
 
             ResultSet rs = st.executeQuery("use itschool;");
             System.out.println("\nUSING DB" + rs.toString());
-
+//"update lessons set name = 'qwerty' where id=1;"
             int result = st.executeUpdate("delete from users where id > 2;");
             System.out.println("\nDeleted " + result + " records");
 
