@@ -136,7 +136,7 @@ public class Controller {
     }
 
     public void ConnectDB(ActionEvent actionEvent) {
-        if (DBconnect("192.168.1.152:3309/itschool", "itschool", ""))
+        if (DBconnect(Const.server+"/itschool", "itschool", "PsM2l20FKz62cK3F"))
             header.setText("Connected sucesfully");
         else
             header.setText("Didn't connected!!!");
@@ -149,7 +149,7 @@ public class Controller {
             // здесь осуществляется соединение c login и password
             Properties properties = new Properties();
             properties.setProperty("user", "itschool");
-            properties.setProperty("password", "");
+            properties.setProperty("password", "PsM2l20FKz62cK3F");
             properties.setProperty("useSSL", "false");
             properties.setProperty("autoReconnect", "true");
             con = getConnection(Const.url, properties);
@@ -163,8 +163,7 @@ public class Controller {
             st1.setString(1, login.getText());
             st1.setString(2, password.getText());
             st1.setString(3, name.getText());
-
-            st1.setString(4, "20190128080000");
+            st1.setString(4, "20190128194314");
             System.out.println("\nParametrized query" + st1.toString());
 
             int result = st1.executeUpdate();

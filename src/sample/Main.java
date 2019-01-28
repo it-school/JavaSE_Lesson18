@@ -31,12 +31,12 @@ public class Main extends Application {
         try
         {
             // JDBC URL для базы данных на Localhost
-            String url = "jdbc:mysql://192.168.1.152:3309/itschool";
+            String url = Const.url;//"jdbc:mysql://192.168.1.152:3309/itschool";
 
             // здесь осуществляется соединение c login и password
             Properties properties = new Properties();
             properties.setProperty("user", "itschool");
-            properties.setProperty("password", "");
+            properties.setProperty("password", "PsM2l20FKz62cK3F");
             properties.setProperty("useSSL", "false");
             properties.setProperty("autoReconnect", "true");
             con = getConnection(url, properties);
