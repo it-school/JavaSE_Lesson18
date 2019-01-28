@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.*;
@@ -24,6 +21,8 @@ public class Controller {
     @FXML
     Button buttonLoadData;
     @FXML
+    Button buttonAddData;
+    @FXML
     TableColumn<Users, Integer> c1;
     @FXML
     TableColumn<Users, String> c2;
@@ -35,6 +34,14 @@ public class Controller {
     TableColumn<Users, Date> c5;
     @FXML
     TitledPane header;
+    @FXML
+    TextField login;
+    @FXML
+    TextField password;
+    @FXML
+    TextField name;
+    @FXML
+    DatePicker birthday;
 
     private Connection con = null;
 
@@ -133,5 +140,54 @@ public class Controller {
             header.setText("Connected sucesfully");
         else
             header.setText("Didn't connected!!!");
+    }
+
+    public void AddData(ActionEvent actionEvent)
+    {
+        try
+        {
+            // здесь осуществляется соединение c login и password
+            Properties properties = new Properties();
+            properties.setProperty("user", "itschool");
+            properties.setProperty("password", "");
+            properties.setProperty("useSSL", "false");
+            properties.setProperty("autoReconnect", "true");
+            con = getConnection(Const.url, properties);
+
+            //  Формирование запросов к БД
+            Statement st = con.createStatement();
+
+            ResultSet rs = st.executeQuery("use itschool;");
+
+            PreparedStatement st1 = con.prepareStatement("insert into users(login, password, name, regdate) values (?, ?, ?, ?);");
+            st1.setString(1, login.getText());
+            st1.setString(2, password.getText());
+            st1.setString(3, name.getText());
+
+            st1.setString(4, "20190128080000");
+            System.out.println("\nParametrized query" + st1.toString());
+
+            int result = st1.executeUpdate();
+            System.out.println("\nInserted " + result + " records");
+
+            rs.close();
+            st.close();
+//  Закончили запрос
+        }
+        catch( SQLException e )
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if ( con != null )
+            {
+                try
+                {
+                    con.close();
+                }
+                catch( Exception e ) { }
+            }
+        }
     }
 }

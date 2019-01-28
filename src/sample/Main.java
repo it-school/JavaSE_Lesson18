@@ -57,7 +57,7 @@ public class Main extends Application {
 
             PreparedStatement st1 = con.prepareStatement("insert into users(id, login, password, name, regdate) values (?, ?, ?, ?, ?);");
             double num1 = Math.random()*100;
-            String date1 = "20091228080000";
+            String date1 = "20190128080000";
 
             String str = String.valueOf(5+Math.round(num1));
             st1.setString(1, "4");
@@ -90,9 +90,6 @@ public class Main extends Application {
             }
         }
     }
-
-
-
 
 
     public static void main(String[] args) {
