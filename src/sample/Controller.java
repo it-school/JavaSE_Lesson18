@@ -103,7 +103,7 @@ public class Controller {
 
             while (rs.next())
             {
-                System.out.println(rs.getString(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3) + "\t" + rs.getString(4) + "\t" + rs.getString(5));
+                // System.out.println(rs.getString(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3) + "\t" + rs.getString(4) + "\t" + rs.getString(5));
                 data.add(new Users(rs.getInt(1), rs.getString(2) ,rs.getString(3), rs.getString(4), rs.getDate(5)));
             }
             table1.setItems(data);
@@ -136,7 +136,7 @@ public class Controller {
     }
 
     public void ConnectDB(ActionEvent actionEvent) {
-        if (DBconnect(Const.server+"/itschool", "itschool", "PsM2l20FKz62cK3F"))
+        if (DBconnect(Const.SERVER + "/itschool", "itschool", ""))
             header.setText("Connected sucesfully");
         else
             header.setText("Didn't connected!!!");
@@ -149,10 +149,10 @@ public class Controller {
             // здесь осуществляется соединение c login и password
             Properties properties = new Properties();
             properties.setProperty("user", "itschool");
-            properties.setProperty("password", "PsM2l20FKz62cK3F");
+            properties.setProperty("password", "");
             properties.setProperty("useSSL", "false");
             properties.setProperty("autoReconnect", "true");
-            con = getConnection(Const.url, properties);
+            con = getConnection(Const.URL, properties);
 
             //  Формирование запросов к БД
             Statement st = con.createStatement();
@@ -163,7 +163,7 @@ public class Controller {
             st1.setString(1, login.getText());
             st1.setString(2, password.getText());
             st1.setString(3, name.getText());
-            st1.setString(4, "20190128194314");
+            st1.setString(4, "20190425194314");
             System.out.println("\nParametrized query" + st1.toString());
 
             int result = st1.executeUpdate();
