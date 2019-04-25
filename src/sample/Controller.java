@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Properties;
 
@@ -162,7 +163,7 @@ public class Controller {
             st1.setString(1, login.getText());
             st1.setString(2, password.getText());
             st1.setString(3, name.getText());
-            st1.setString(4, "20190425194314");
+            st1.setString(4, birthday.getValue().format(DateTimeFormatter.BASIC_ISO_DATE));
             System.out.println("\nParametrized query" + st1.toString());
 
             int result = st1.executeUpdate();
