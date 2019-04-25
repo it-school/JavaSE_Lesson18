@@ -111,8 +111,7 @@ public class Controller {
             rs.close();
             st.close();
         //  Закончили запрос
-        }
-        catch( SQLException e )
+        } catch (SQLException e)
         {
             header.setText("Error while loading data!!!");
             e.printStackTrace();
@@ -183,7 +182,7 @@ public class Controller {
             {
                 try
                 {
-                    con.close();
+                    // con.close();
                 }
                 catch( Exception e ) { }
             }

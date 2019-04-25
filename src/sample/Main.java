@@ -26,6 +26,7 @@ public class Main extends Application {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            return;
         }
 
         try
@@ -52,7 +53,7 @@ public class Main extends Application {
             int result = st.executeUpdate("delete from users where id > 2;");
             System.out.println("\nDeleted " + result + " records");
 
-            result = st.executeUpdate("insert into users(id, login, password, name, regdate) values (3, 'user123', 'password123', 'User User User', '20090708212121');");
+            result = st.executeUpdate("insert into users(id, login, password, name, regdate) values (null, 'user123', 'password123', 'User User User', '20090708212121');");
             System.out.println("\nInserted " + result + " records");
 
             PreparedStatement st1 = con.prepareStatement("insert into users(id, login, password, name, regdate) values (?, ?, ?, ?, ?);");
