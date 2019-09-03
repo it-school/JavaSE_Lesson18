@@ -62,6 +62,7 @@ public class Controller {
             Properties properties = new Properties();
             properties.setProperty("user", login);
             properties.setProperty("password", password);
+            properties.setProperty("serverTimezone", "UTC");
             properties.setProperty("useSSL", "false");
             properties.setProperty("autoReconnect", "true");
 
@@ -117,7 +118,6 @@ public class Controller {
             header.setText("Error while loading data!!!");
             e.printStackTrace();
         }
-
     }
 
     public void Exit(ActionEvent actionEvent) {
@@ -132,11 +132,10 @@ public class Controller {
                 e.printStackTrace();
             }
         }
-
     }
 
     public void ConnectDB(ActionEvent actionEvent) {
-        if (DBconnect(Const.SERVER + "/itschool", "itschool", ""))
+        if (DBconnect(Const.SERVER + "/test", "root", "password"))
             header.setText("Connected sucesfully");
         else
             header.setText("Didn't connected!!!");
@@ -144,12 +143,27 @@ public class Controller {
 
     public void AddData(ActionEvent actionEvent)
     {
+        String logins = "";
+        String passw = "";
+        String names = "";
+        String birth = "";
+
+        try {
+            logins = login.getText();
+            passw = password.getText();
+            names = name.getText();
+            birth = birthday.getValue().format(DateTimeFormatter.BASIC_ISO_DATE);
+        } catch (Exception exc) {
+            MessageBox(Alert.AlertType.ERROR, "Ошибка ввода данных", "Не все поля заполнены");
+            return;
+        }
         try
         {
             // здесь осуществляется соединение c login и password
             Properties properties = new Properties();
-            properties.setProperty("user", "itschool");
-            properties.setProperty("password", "");
+            properties.setProperty("user", "root");
+            properties.setProperty("password", "password");
+            properties.setProperty("serverTimezone", "UTC");
             properties.setProperty("useSSL", "false");
             properties.setProperty("autoReconnect", "true");
             con = getConnection(Const.URL, properties);
@@ -157,13 +171,13 @@ public class Controller {
             //  Формирование запросов к БД
             Statement st = con.createStatement();
 
-            ResultSet rs = st.executeQuery("use itschool;");
+            ResultSet rs = st.executeQuery("use test;");
 
             PreparedStatement st1 = con.prepareStatement("insert into users(login, password, name, regdate) values (?, ?, ?, ?);");
-            st1.setString(1, login.getText());
-            st1.setString(2, password.getText());
-            st1.setString(3, name.getText());
-            st1.setString(4, birthday.getValue().format(DateTimeFormatter.BASIC_ISO_DATE));
+            st1.setString(1, logins);
+            st1.setString(2, passw);
+            st1.setString(3, names);
+            st1.setString(4, birth);
             System.out.println("\nParametrized query" + st1.toString());
 
             int result = st1.executeUpdate();
@@ -171,6 +185,9 @@ public class Controller {
 
             rs.close();
             st.close();
+            st.close();
+
+            LoadData(actionEvent);
 //  Закончили запрос
         }
         catch( SQLException e )
@@ -188,5 +205,13 @@ public class Controller {
                 catch( Exception e ) { }
             }
         }
+    }
+
+    private void MessageBox(Alert.AlertType type, String info, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(alert.getAlertType().toString());
+        alert.setHeaderText(info);
+        alert.setContentText(message);
+        alert.show();
     }
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <TitledPane fx:id="header" animated="false">
+        <content>
+          <AnchorPane minHeight="50.0" minWidth="0.0" prefHeight="180.0" prefWidth="598.0">
+               <children>
+                  <Button fx:id="buttonConnectDB" alignment="CENTER" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#ConnectDB" prefHeight="25.0" prefWidth="100.0" text="Connect to DB" />
+                  <Button fx:id="buttonLoadData" alignment="CENTER" layoutX="170.0" layoutY="13.0" mnemonicParsing="false" onAction="#LoadData" prefHeight="25.0" prefWidth="100.0" text="Load data" />
+                  <Button fx:id="buttonAddData" alignment="CENTER" layoutX="329.0" layoutY="13.0" mnemonicParsing="false" onAction="#AddData" prefHeight="25.0" prefWidth="100.0" text="Add data" />
+                  <Button fx:id="buttonDisconnect" alignment="CENTER" layoutX="490.0" layoutY="13.0" mnemonicParsing="false" onAction="#Exit" prefHeight="25.0" prefWidth="100.0" text="Disconnect" />
+                  <GridPane layoutX="6.0" layoutY="43.0" prefHeight="55.0" prefWidth="587.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="login" GridPane.rowIndex="1" />
+                        <TextField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <DatePicker fx:id="birthday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+
+                         <Label fx:id="labelLogin" text="login" textAlignment="CENTER" GridPane.columnIndex="0" />
+                         <Label fx:id="labelPassword" layoutX="10.0" layoutY="15.0" text="password" textAlignment="CENTER" GridPane.columnIndex="1" />
+                         <Label fx:id="labelName" layoutX="157.0" layoutY="15.0" text="name" textAlignment="CENTER" GridPane.columnIndex="2" />
+                         <Label fx:id="labelBirthday" layoutX="304.0" layoutY="15.0" text="birthday" textAlignment="CENTER" GridPane.columnIndex="3" />
+                     </children>
+                  </GridPane>
+               </children></AnchorPane>
+        </content>
+      </TitledPane>
+      <TableView fx:id="table1" editable="true" prefHeight="287.0" prefWidth="600.0">
+        <columns>
+            <TableColumn fx:id="c1" prefWidth="50.0" text="ID" />
+            <TableColumn fx:id="c2" prefWidth="122.0" text="login" />
+            <TableColumn fx:id="c3" prefWidth="108.0" text="password" />
+            <TableColumn fx:id="c4" prefWidth="199.0" text="name" />
+            <TableColumn fx:id="c5" prefWidth="118.0" text="registered" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

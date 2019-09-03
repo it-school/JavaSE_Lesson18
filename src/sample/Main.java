@@ -36,18 +36,18 @@ public class Main extends Application {
 
             // здесь осуществляется соединение c login и password
             Properties properties = new Properties();
-            properties.setProperty("user", "itschool");
-            properties.setProperty("password", "");//"PsM2l20FKz62cK3F");
+            properties.setProperty("user", "root");
+            properties.setProperty("password", "password");//"PsM2l20FKz62cK3F");
             properties.setProperty("useSSL", "false");
+            properties.setProperty("serverTimezone", "UTC");
             properties.setProperty("autoReconnect", "true");
             con = getConnection(url, properties);
             System.out.println("Connection ID" + con.toString());
 
-
             //  Формирование запросов к БД
             Statement st = con.createStatement();
 
-            ResultSet rs = st.executeQuery("use itschool;");
+            ResultSet rs = st.executeQuery("use test;");
             System.out.println("\nUSING DB" + rs.toString());
 //"update lessons set name = 'qwerty' where id=1;"
             int result = st.executeUpdate("delete from users where id > 2;");
