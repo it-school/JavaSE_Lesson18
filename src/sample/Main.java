@@ -37,7 +37,7 @@ public class Main extends Application {
             // здесь осуществляется соединение c login и password
             Properties properties = new Properties();
             properties.setProperty("user", "root");
-            properties.setProperty("password", "password");//"PsM2l20FKz62cK3F");
+            properties.setProperty("password", "password");
             properties.setProperty("useSSL", "false");
             properties.setProperty("serverTimezone", "UTC");
             properties.setProperty("autoReconnect", "true");
@@ -50,22 +50,21 @@ public class Main extends Application {
             ResultSet rs = st.executeQuery("use test;");
             System.out.println("\nUSING DB" + rs.toString());
 //"update lessons set name = 'qwerty' where id=1;"
-            int result = st.executeUpdate("delete from users where id > 2;");
+
+            int result = st.executeUpdate("DELETE FROM users WHERE id > 60;");
             System.out.println("\nDeleted " + result + " records");
 
-            result = st.executeUpdate("insert into users(id, login, password, name, regdate) values (null, 'user123', 'password123', 'User User User', '20090708212121');");
+            result = st.executeUpdate("INSERT INTO users(id, login, password, name, regdate) VALUES (null, 'user124', 'password124', 'User User User', '20090708212121');");
             System.out.println("\nInserted " + result + " records");
 
-            PreparedStatement st1 = con.prepareStatement("insert into users(id, login, password, name, regdate) values (?, ?, ?, ?, ?);");
+            PreparedStatement st1 = con.prepareStatement("INSERT INTO users(login, password, name, regdate) VALUES (?, ?, ?, ?);");
             double num1 = Math.random()*100;
             String date1 = "20190128080000";
-
             String str = String.valueOf(5+Math.round(num1));
-            st1.setString(1, "4");
-            st1.setString(2, "user" + str);
-            st1.setString(3, "password" + str);
-            st1.setString(4, "user" + str);
-            st1.setString(5, date1);
+            st1.setString(1, "user" + str);
+            st1.setString(2, "password" + str);
+            st1.setString(3, "user" + str);
+            st1.setString(4, date1);
             System.out.println("\nParametrized query" + st1.toString());
 
             result = st1.executeUpdate();

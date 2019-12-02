@@ -34,6 +34,8 @@ public class Controller {
     @FXML
     TableColumn<Users, Date> c5;
     @FXML
+    TableColumn<Users, String> c6;
+    @FXML
     TitledPane header;
     @FXML
     TextField login;
@@ -85,7 +87,8 @@ public class Controller {
 
             ResultSet rs;// = st.executeQuery("use itschool;");
 
-            rs = st.executeQuery("select * from users;");
+//            rs = st.executeQuery("SELECT * FROM users;");
+            rs = st.executeQuery("select u.id, u.name, u.login, u.password, u.regdate, c.city FROM users AS u LEFT JOIN cities AS c ON c.id = u.id_city;");
             System.out.println("\nEXECUTING QUERY TO DB: "+rs.toString()+"\n");
 
             data = FXCollections.observableArrayList();
@@ -102,11 +105,12 @@ public class Controller {
             c3.setCellValueFactory(new PropertyValueFactory<>("password"));
             c4.setCellValueFactory(new PropertyValueFactory<>("name"));
             c5.setCellValueFactory(new PropertyValueFactory<>("datereg"));
+            c6.setCellValueFactory(new PropertyValueFactory<>("city"));
 
             while (rs.next())
             {
                 // System.out.println(rs.getString(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3) + "\t" + rs.getString(4) + "\t" + rs.getString(5));
-                data.add(new Users(rs.getInt(1), rs.getString(2) ,rs.getString(3), rs.getString(4), rs.getDate(5)));
+                data.add(new Users(rs.getInt("id"), rs.getString("login"), Encrypt(rs.getString("password"), -3), rs.getString("name"), rs.getDate("regdate"), rs.getString("city")));
             }
             table1.setItems(data);
 
@@ -153,10 +157,13 @@ public class Controller {
             passw = password.getText();
             names = name.getText();
             birth = birthday.getValue().format(DateTimeFormatter.BASIC_ISO_DATE);
+            System.out.println(birthday.getValue());
+            System.out.println(birth);
         } catch (Exception exc) {
             MessageBox(Alert.AlertType.ERROR, "Ошибка ввода данных", "Не все поля заполнены");
             return;
         }
+
         try
         {
             // здесь осуществляется соединение c login и password
@@ -175,7 +182,7 @@ public class Controller {
 
             PreparedStatement st1 = con.prepareStatement("insert into users(login, password, name, regdate) values (?, ?, ?, ?);");
             st1.setString(1, logins);
-            st1.setString(2, passw);
+            st1.setString(2, Encrypt(passw, 3));
             st1.setString(3, names);
             st1.setString(4, birth);
             System.out.println("\nParametrized query" + st1.toString());
@@ -185,9 +192,9 @@ public class Controller {
 
             rs.close();
             st.close();
-            st.close();
 
             LoadData(actionEvent);
+            // MessageBox(Alert.AlertType.NONE, "Encrypted text", Encrypt("ABC", 3));
 //  Закончили запрос
         }
         catch( SQLException e )
@@ -212,6 +219,16 @@ public class Controller {
         alert.setTitle(alert.getAlertType().toString());
         alert.setHeaderText(info);
         alert.setContentText(message);
-        alert.show();
+        alert.showAndWait();
+    }
+
+    public String Encrypt(String text, int key) {
+        String result = "";
+        char[] array = text.toCharArray();
+        for (int i = 0; i < text.length(); i++) {
+            //result += ""+(char)(((int)array[i])+3);
+            result += (char) (array[i] + key);
+        }
+        return result;
     }
 }

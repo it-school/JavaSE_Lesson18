@@ -39,11 +39,13 @@
                         <TextField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <DatePicker fx:id="birthday" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                         <TextField fx:id="city" GridPane.columnIndex="4" GridPane.rowIndex="1" />
 
                          <Label fx:id="labelLogin" text="login" textAlignment="CENTER" GridPane.columnIndex="0" />
                          <Label fx:id="labelPassword" layoutX="10.0" layoutY="15.0" text="password" textAlignment="CENTER" GridPane.columnIndex="1" />
                          <Label fx:id="labelName" layoutX="157.0" layoutY="15.0" text="name" textAlignment="CENTER" GridPane.columnIndex="2" />
                          <Label fx:id="labelBirthday" layoutX="304.0" layoutY="15.0" text="birthday" textAlignment="CENTER" GridPane.columnIndex="3" />
+                         <Label fx:id="labelCity" layoutX="304.0" layoutY="15.0" text="city" textAlignment="CENTER" GridPane.columnIndex="4" />
                      </children>
                   </GridPane>
                </children></AnchorPane>
@@ -54,8 +56,9 @@
             <TableColumn fx:id="c1" prefWidth="50.0" text="ID" />
             <TableColumn fx:id="c2" prefWidth="122.0" text="login" />
             <TableColumn fx:id="c3" prefWidth="108.0" text="password" />
-            <TableColumn fx:id="c4" prefWidth="199.0" text="name" />
+            <TableColumn fx:id="c4" prefWidth="130.0" text="name" />
             <TableColumn fx:id="c5" prefWidth="118.0" text="registered" />
+            <TableColumn fx:id="c6" prefWidth="70.0" text="registered" />
         </columns>
       </TableView>
    </children>

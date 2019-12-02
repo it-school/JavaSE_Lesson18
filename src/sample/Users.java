@@ -8,13 +8,24 @@ public class Users {
     private String password;
     private String name;
     private Date datereg;
+    private String city;
 
-    public Users(int id, String login, String password, String name, Date datereg) {
+
+    public Users(int id, String login, String password, String name, Date datereg, String city) {
         ID = id;
         this.login = login;
         this.password = password;
         this.name = name;
         this.datereg = datereg;
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public int getID() {
